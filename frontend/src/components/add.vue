@@ -14,19 +14,17 @@
       components: {userform, navbar},
       data(){
         return{
-          form: {
-            fn: '', ln: '', an: ''
-          },
-          thisresponse: ''
+          thisresponse: '',
+          pagetitle: 'Add a user'
         }
       },
       methods: {
         onSubmit(evt) {
           evt.preventDefault();
           var params = new URLSearchParams();
-          params.append('firstname', this.form.fn);
-          params.append('lastname', this.form.ln);
-          params.append('accountno', this.form.an);
+          params.append('firstname', this.$children[1].form.fn);
+          params.append('lastname', this.$children[1].form.ln);
+          params.append('accountno', this.$children[1].form.an);
           axios.post(`/backend/add`, params)
             .then(response => {
               this.thisresponse = response.data
@@ -37,10 +35,9 @@
         },
         onReset(evt) {
           evt.preventDefault();
-          /* Reset our form values */
-          this.form.fn = '';
-          this.form.ln = '';
-          this.form.an = '';
+          this.$children[1].form.fn = '';
+          this.$children[1].form.ln = '';
+          this.$children[1].form.an = '';
           this.thisresponse = '';
         }
       }

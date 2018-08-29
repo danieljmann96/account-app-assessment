@@ -3,7 +3,7 @@
     <navbar />
     <b-table striped hover outlined dark :items="items" :fields="fields">
       <template slot="edit" slot-scope="row">
-        <router-link :to="{ path: '/edit/' } + row.item.id">
+        <router-link :to="'/edit/' + row.item.id">
         <font-awesome-icon icon="edit" style="color: lightgreen;"/>
         </router-link>
       </template>
@@ -27,8 +27,8 @@
         data(){
           return {
             fields: ['first_name', 'last_name', 'account_no', 'edit', 'delete'],
-            isBusy: false,
-            items: []
+            items: [],
+            pagetitle: 'View users'
           }
       },
       methods: {

@@ -20,10 +20,10 @@
       </b-navbar-nav>
 
     </b-collapse>
+    <b-navbar-brand>{{ this.$parent.pagetitle }}</b-navbar-brand>
   </b-navbar>
   </div>
 </template>
-
 <script>
   export default {
         name: 'navbar'

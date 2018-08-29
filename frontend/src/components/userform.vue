@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-form @submit="onSubmit" @reset="onReset">
+    <b-form @submit="this.$parent.onSubmit" @reset="this.$parent.onReset">
       <b-form-group horizontal id="InputGroup1" label="First Name:" label-for="Input1">
         <b-form-input id="Input1" type="text"
                       v-model="form.fn" required
@@ -25,13 +25,22 @@
       <b-button type="submit" variant="primary">Submit</b-button>
       <b-button type="reset" variant="danger">Reset</b-button>
     </b-form>
-    <h2>{{ thisresponse }}</h2>
+    <h2>{{ this.$parent.thisresponse }}</h2>
   </div>
 </template>
 
 <script>
     export default {
-        name: 'userform'
+        name: 'userform',
+      data(){
+          return {
+            form: {
+              fn: '',
+              ln: '',
+              an: ''
+            }
+        }
+      }
     }
 </script>
 
