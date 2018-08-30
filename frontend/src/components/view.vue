@@ -17,7 +17,6 @@
         </b-link>
       </template>
     </b-table>
-
     <b-modal id="modalsm" size="sm" title="Delete User"
              v-model="show" :header-bg-variant="'danger'"
              :header-text-variant="'light'"
@@ -48,9 +47,11 @@
       },
         data(){
           return {
-            fields: ['first_name',
-              'last_name',
-              'account_no', 'edit', 'delete'],
+            fields: [{key: 'first_name', sortable: true},
+              {key: 'last_name', sortable: true},
+              {key: 'account_no', sortable: true},
+              'edit',
+              'delete'],
             items: [],
             pagetitle: 'View users',
             show: false,
