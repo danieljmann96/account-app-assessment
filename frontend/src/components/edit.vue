@@ -13,18 +13,28 @@
         name: 'edit',
         components: {userform, navbar},
       mounted(){
-        alert(this.$route.params.id)
+        this.loadInputs(this.$route.params.id);
       },
         data(){
         return{
           thisresponse: '',
-          pagetitle: 'Edit a user'
+          pagetitle: ''
         }
       },
       methods: {
+        loadInputs(thisId){
+          axios.get(`/backend/view/` + thisId)
+            .then(response => {
+              this.$children[1].form.fn = response.data.first_name;
+              this.$children[1].form.ln = response.data.last_name;
+              this.$children[1].form.an = response.data.account_no;
+              this.pagetitle = 'Editing ' + this.$children[1].form.fn + ' ' + this.$children[1].form.ln;
+          })
+        },
         onSubmit(evt) {
           evt.preventDefault();
           var params = new URLSearchParams();
+          params.append('id', this.$route.params.id);
           params.append('firstname', this.$children[1].form.fn);
           params.append('lastname', this.$children[1].form.ln);
           params.append('accountno', this.$children[1].form.an);
@@ -34,7 +44,8 @@
             })
             .catch(e => {
               this.errors.push(e)
-            })
+            });
+          this.$children[1].show = true;
         },
         onReset(evt) {
           evt.preventDefault();

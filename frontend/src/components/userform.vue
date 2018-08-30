@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mt-4">
     <b-form @submit="this.$parent.onSubmit" @reset="this.$parent.onReset">
       <b-form-group horizontal id="InputGroup1" label="First Name:" label-for="Input1">
         <b-form-input id="Input1" type="text"
@@ -25,7 +25,23 @@
       <b-button type="submit" variant="primary">Submit</b-button>
       <b-button type="reset" variant="danger">Reset</b-button>
     </b-form>
-    <h2>{{ this.$parent.thisresponse }}</h2>
+    <b-modal v-model="show"
+             title="Success!"
+             :header-bg-variant="'success'"
+             :header-text-variant="'light'"
+             :body-bg-variant="'light'"
+             :body-text-variant="'dark'"
+             :footer-bg-variant="'light'"
+             :footer-text-variant="'dark'">
+      <b-container fluid>
+        {{ this.$parent.thisresponse }}
+      </b-container>
+      <div slot="modal-footer" class="w-100">
+        <b-btn class="float-right" variant="success" :to="{ name: 'view' }">
+          OK
+        </b-btn>
+      </div>
+    </b-modal>
   </div>
 </template>
 
@@ -38,8 +54,10 @@
               fn: '',
               ln: '',
               an: ''
-            }
+            },
+            show: false
         }
+
       }
     }
 </script>

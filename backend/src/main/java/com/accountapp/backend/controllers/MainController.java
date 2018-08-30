@@ -40,5 +40,11 @@ public class MainController {
         userRepository.save(personnel);
         return "Saved";
     }
+    @RequestMapping(path = "/delete", method = RequestMethod.POST)
+    public @ResponseBody String deleteUserById(@RequestParam int id){
+        Personnel personnel = userRepository.findById(id).get();
+        userRepository.delete(personnel);
+        return "Deleted";
+    }
 }
 

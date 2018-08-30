@@ -31,7 +31,8 @@
             })
             .catch(e => {
               this.errors.push(e)
-            })
+            });
+          this.$children[1].show = true;
         },
         onReset(evt) {
           evt.preventDefault();
