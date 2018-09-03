@@ -17,7 +17,6 @@
         </b-link>
       </template>
     </b-table>
-
     <b-modal id="modalsm" size="sm" title="Delete User"
              v-model="show" :header-bg-variant="'danger'"
              :header-text-variant="'light'"
