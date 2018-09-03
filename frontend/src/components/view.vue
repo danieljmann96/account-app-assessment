@@ -48,9 +48,11 @@
       },
         data(){
           return {
-            fields: ['first_name',
-              'last_name',
-              'account_no', 'edit', 'delete'],
+            fields: [{key: 'first_name', sortable: true},
+              {key: 'last_name', sortable: true},
+              {key: 'account_no', sortable: true},
+              'edit',
+              'delete'],
             items: [],
             pagetitle: 'View users',
             show: false,
@@ -76,11 +78,9 @@
             this.modalresponse = x.first_name + ' ' + x.last_name;
           },
           deleteUser: function() {
-            var params = new URLSearchParams();
-            params.append('id', this.usedid);
-            axios.post(`backend/delete`, params)
+            axios.delete(`/backend/delete/` + this.usedid)
               .then(response => {
-                this.getItemsFromAxios()
+                this.getItemsFromAxios();
                 this.show = false;
               })
               .catch(e => {

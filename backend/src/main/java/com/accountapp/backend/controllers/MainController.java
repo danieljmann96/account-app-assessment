@@ -9,7 +9,7 @@ import com.accountapp.backend.repositories.UserRepository;
 public class MainController {
     @Autowired
     private UserRepository userRepository;
-    @RequestMapping(path = "/add", method = RequestMethod.POST)
+    @PostMapping("/add")
     public @ResponseBody String addNewUser(@RequestParam String firstname,
                                            @RequestParam String lastname,
                                            @RequestParam String accountno){
@@ -28,8 +28,8 @@ public class MainController {
     public @ResponseBody Personnel getUserById(@PathVariable("id") int id){
         return userRepository.findById(id).get();
     }
-    @RequestMapping(path = "/edit", method = RequestMethod.POST)
-    public @ResponseBody String editUserById(@RequestParam int id,
+    @PutMapping(path = "/edit/{id}")
+    public @ResponseBody String editUserById(@PathVariable int id,
                                              @RequestParam String firstname,
                                              @RequestParam String lastname,
                                              @RequestParam String accountno){
@@ -40,8 +40,8 @@ public class MainController {
         userRepository.save(personnel);
         return "Saved";
     }
-    @RequestMapping(path = "/delete", method = RequestMethod.POST)
-    public @ResponseBody String deleteUserById(@RequestParam int id){
+    @DeleteMapping("/delete/{id}")
+    public @ResponseBody String deleteUserById(@PathVariable int id){
         Personnel personnel = userRepository.findById(id).get();
         userRepository.delete(personnel);
         return "Deleted";

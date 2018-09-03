@@ -34,11 +34,10 @@
         onSubmit(evt) {
           evt.preventDefault();
           var params = new URLSearchParams();
-          params.append('id', this.$route.params.id);
           params.append('firstname', this.$children[1].form.fn);
           params.append('lastname', this.$children[1].form.ln);
           params.append('accountno', this.$children[1].form.an);
-          axios.post(`/backend/edit`, params)
+          axios.put(`/backend/edit/` + this.$route.params.id, params)
             .then(response => {
               this.thisresponse = response.data
             })
